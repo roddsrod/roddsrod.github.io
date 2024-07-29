@@ -24,6 +24,7 @@ header p {
 
 main {
     padding: 1em;
+    text-align: center;
 }
 
 section {
@@ -31,7 +32,7 @@ section {
 }
 
 h2 {
-    color: #4CAF50;
+    color: #1c18df;
 }
 
 ul {

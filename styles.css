@@ -32,7 +32,7 @@ section {
 }
 
 h2 {
-    color: #1c18df;
+    color: #01003a;
 }
 
 ul {
@@ -62,4 +62,9 @@ footer {
 
 footer a {
     color: #4fa6ec;
+}
+
+img {
+    max-width: 160px;
+    height: auto;
 }

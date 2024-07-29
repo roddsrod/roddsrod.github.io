@@ -65,6 +65,6 @@ footer a {
 }
 
 img {
-    max-width: 160px;
-    height: auto;
+    max-width: 160px !important;
+    height: auto !important;
 }

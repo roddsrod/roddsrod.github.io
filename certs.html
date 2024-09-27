@@ -13,9 +13,10 @@
             text-align: center; /* Center text in the body */
         }
         .gallery {
-            display: grid;
+            display: flex;
             grid-template-columns: repeat(auto-fill, minmax(512px, 1fr));
             gap: 20px;
+            flex-wrap: wrap;
             justify-content: center; /* Center the grid items */
         }
         .gallery img {

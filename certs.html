@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Grid Showcase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(512px, 1fr));
+            gap: 20px;
+        }
+        .gallery img {
+            width: 512px;
+            height: 512px;
+            object-fit: cover; /* Ensures images are cropped to fit */
+            border-radius: 8px; /* Optional: for rounded corners */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Certifications</h1>
+<div class="gallery">
+    <a href=https://www.hackerrank.com/certificates/d1aac66a1167><img src="/images/Python_HR.png" alt="Python_HR">
+</div>
+
+</body>
+</html>

@@ -35,7 +35,7 @@ h2 {
     color: #01003a;
 }
 
-ul {
+/* ul {
     list-style-type: none; /* Remove bullet points */
     padding: 0; /* Remove padding */
     margin: 0; /* Remove margin */
@@ -44,7 +44,7 @@ ul {
 
 li {
     margin: 0.5em 0;
-}
+} */
 
 a {
     text-decoration: none;

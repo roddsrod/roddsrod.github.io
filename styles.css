@@ -39,8 +39,6 @@ ul {
     list-style-type: none; /* Remove bullet points */
     padding: 0; /* Remove padding */
     margin: 0; /* Remove margin */
-    display: flex; /* Use flexbox for the layout */
-    flex-wrap: wrap; /* Allow items to wrap onto the next line */
     justify-content: center; /* Center the items */
 }
 
@@ -55,6 +53,22 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.links {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow items to wrap onto the next line */
+    justify-content: center; /* Center the items */
+    gap: 20px; /* Add space between items */
+}
+
+.links li {
+    flex: 0 1 calc(50% - 20px); /* Two items per row with space between them */
+    box-sizing: border-box; /* Ensure padding/margin are included in the width */
+    margin-bottom: 20px; /* Add space at the bottom */
 }
 
 footer {

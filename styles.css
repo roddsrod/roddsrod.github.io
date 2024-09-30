@@ -84,3 +84,8 @@ img {
     max-width: 160px !important;
     height: auto !important;
 }
+
+.certificates img {
+    width: auto !important;
+    max-height: 220px !important;
+}

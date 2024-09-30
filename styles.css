@@ -66,6 +66,7 @@ a:hover {
     flex: 0 1 calc(50% - 20px); /* Two items per row with space between them */
     box-sizing: border-box; /* Ensure padding/margin are included in the width */
     margin-bottom: 20px; /* Add space at the bottom */
+    align-imtems: center; /* Vertically center the images */
 }
 
 footer {

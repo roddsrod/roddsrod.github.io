@@ -83,5 +83,4 @@ footer a {
 img {
     max-width: 160px !important;
     height: auto !important;
-    display: block; /* Ensure the images are block elements */
 }

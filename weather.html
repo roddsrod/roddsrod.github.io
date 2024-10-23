@@ -77,7 +77,7 @@
     <script>
         async function fetchData() {
             try {
-                const response = await fetch('./weather/weather.xml');
+                const response = await fetch('/roddsrod.github.io/weather/weather.xml');
                 const xmlText = await response.text();
                 const parser = new DOMParser();
                 const xmlDoc = parser.parseFromString(xmlText, 'text/xml');

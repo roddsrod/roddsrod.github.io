@@ -1,20 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- ... head and style sections remain the same ... -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather and Air Quality Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f6fa;
+            --text-color: #2c3e50;
+            --border-radius: 15px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
 
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--text-color);
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .timestamp {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: var(--transition);
+            display: block;
+            margin: 20px auto;
+            box-shadow: var(--box-shadow);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .data-item {
+            background: var(--secondary-color);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .data-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .label {
+            font-weight: 500;
+            color: #666;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        /* Specific styling for different types of data */
+        .data-item[data-type="temperature"] {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        }
+
+        .data-item[data-type="humidity"] {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+        }
+
+        .data-item[data-type="wind"] {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .data-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .value {
+                font-size: 1.5em;
+            }
+        }
+
+        /* Loading animation */
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        .loading {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
 <body>
-    <h1>Weather and Air Quality Data</h1>
-    <div class="timestamp" id="timestamp"></div>
-    <button onclick="fetchData()">Refresh Data</button>
-    <div class="card" id="results">
-        <div class="data-grid">
-            <!-- Data will be inserted here -->
+    <div class="container">
+        <h1>Weather and Air Quality Dashboard</h1>
+        <div class="timestamp" id="timestamp"></div>
+        <button onclick="fetchData()">
+            <span>↻</span> Refresh Data
+        </button>
+        <div class="card">
+            <div class="data-grid" id="dataGrid">
+                <!-- Data will be inserted here -->
+            </div>
         </div>
     </div>
 
     <script>
         async function fetchData() {
             try {
+                // Show loading state
+                document.getElementById('dataGrid').innerHTML = '<div class="loading">Loading data...</div>';
+
                 const response = await fetch('https://roddsrod.github.io/weather/weather.xml', {
                     method: 'GET',
                     headers: {
@@ -31,35 +184,31 @@
                 const xmlText = await response.text();
                 const parser = new DOMParser();
                 const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-
                 const current = xmlDoc.querySelector('current');
-                if (!current) {
-                    throw new Error('No current data found in XML');
-                }
 
-                const dataGrid = document.querySelector('.data-grid');
+                const dataGrid = document.getElementById('dataGrid');
                 dataGrid.innerHTML = '';
 
                 const dataItems = [
-                    { key: 'city', label: 'City', unit: '' },
-                    { key: 'temperature', label: 'Temperature', unit: '°C' },
-                    { key: 'feelslike', label: 'Feels Like', unit: '°C' },
-                    { key: 'wind', label: 'Wind Speed', unit: 'km/h' },
-                    { key: 'humidity', label: 'Humidity', unit: '%' },
-                    { key: 'visibility', label: 'Visibility', unit: '' },
-                    { key: 'UV', label: 'UV Index', unit: '' },
-                    { key: 'CO', label: 'CO', unit: 'µg/m³' },
-                    { key: 'NO2', label: 'NO2', unit: 'µg/m³' },
-                    { key: 'PM2\\.5', label: 'PM2.5', unit: 'µg/m³' }, // Changed selector
-                    { key: 'PM10', label: 'PM10', unit: 'µg/m³' }
+                    { key: 'city', label: 'Location', unit: '', type: 'location' },
+                    { key: 'temperature', label: 'Temperature', unit: '°C', type: 'temperature' },
+                    { key: 'feelslike', label: 'Feels Like', unit: '°C', type: 'temperature' },
+                    { key: 'wind', label: 'Wind Speed', unit: 'km/h', type: 'wind' },
+                    { key: 'humidity', label: 'Humidity', unit: '%', type: 'humidity' },
+                    { key: 'visibility', label: 'Visibility', unit: '', type: 'visibility' },
+                    { key: 'UV', label: 'UV Index', unit: '', type: 'uv' },
+                    { key: 'CO', label: 'Carbon Monoxide', unit: 'µg/m³', type: 'pollution' },
+                    { key: 'NO2', label: 'Nitrogen Dioxide', unit: 'µg/m³', type: 'pollution' },
+                    { key: 'PM2.5', label: 'PM2.5', unit: 'µg/m³', type: 'pollution' },
+                    { key: 'PM10', label: 'PM10', unit: 'µg/m³', type: 'pollution' }
                 ];
 
                 dataItems.forEach(item => {
-                    // Use getElementsByTagName instead of querySelector for more reliable selection
                     const elements = current.getElementsByTagName(item.key.replace('\\', ''));
                     if (elements.length > 0 && elements[0].textContent) {
                         const div = document.createElement('div');
                         div.className = 'data-item';
+                        div.setAttribute('data-type', item.type);
                         div.innerHTML = `
                             <div class="label">${item.label}</div>
                             <div class="value">${elements[0].textContent}${item.unit}</div>
@@ -75,16 +224,15 @@
 
             } catch (error) {
                 console.error('Detailed error:', error);
-                document.querySelector('.data-grid').innerHTML = `
-                    <div class="data-item" style="grid-column: 1 / -1; color: red;">
-                        Error loading data. Please try again later.<br>
-                        Error details: ${error.message}<br>
-                        <small>Check browser console for more information.</small>
+                document.getElementById('dataGrid').innerHTML = `
+                    <div class="data-item" style="grid-column: 1 / -1; color: #e74c3c;">
+                        <div class="label">Error</div>
+                        <div class="value">Unable to load data</div>
+                        <small>${error.message}</small>
                     </div>`;
             }
         }
 
-        // Fetch data when page loads
         document.addEventListener('DOMContentLoaded', fetchData);
     </script>
 </body>

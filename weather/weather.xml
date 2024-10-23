@@ -1,0 +1,18 @@
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+    <soap:Header/>
+    <soap:Body>
+        <current>
+            <city>PAR</city>
+            <temperature>17.2</temperature>
+            <feelslike>17.2</feelslike>
+            <wind>11.2</wind>
+            <humidity>59</humidity>
+            <visibility>Low Visibility</visibility>
+            <UV>1.8</UV>
+            <CO>347.8</CO>
+            <NO2>18.5</NO2>
+            <PM2.5>22.385</PM2.5>
+            <PM10>33.3</PM10>
+        </current>
+    </soap:Body>
+</soap:Envelope>

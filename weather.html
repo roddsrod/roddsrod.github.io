@@ -21,7 +21,7 @@
                         'Accept': 'application/xml',
                         'Content-Type': 'application/xml',
                     },
-                    cache: 'no-cache' // Add this to prevent caching
+                    cache: 'no-cache'
                 });
 
                 if (!response.ok) {
@@ -29,15 +29,8 @@
                 }
 
                 const xmlText = await response.text();
-                console.log('XML received:', xmlText); // Debug log
-
                 const parser = new DOMParser();
                 const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-
-                // Check for parsing errors
-                if (xmlDoc.getElementsByTagName('parsererror').length > 0) {
-                    throw new Error('XML parsing failed');
-                }
 
                 const current = xmlDoc.querySelector('current');
                 if (!current) {
@@ -45,7 +38,7 @@
                 }
 
                 const dataGrid = document.querySelector('.data-grid');
-                dataGrid.innerHTML = ''; // Clear existing data
+                dataGrid.innerHTML = '';
 
                 const dataItems = [
                     { key: 'city', label: 'City', unit: '' },
@@ -57,18 +50,19 @@
                     { key: 'UV', label: 'UV Index', unit: '' },
                     { key: 'CO', label: 'CO', unit: 'µg/m³' },
                     { key: 'NO2', label: 'NO2', unit: 'µg/m³' },
-                    { key: 'PM2.5', label: 'PM2.5', unit: 'µg/m³' },
+                    { key: 'PM2\\.5', label: 'PM2.5', unit: 'µg/m³' }, // Changed selector
                     { key: 'PM10', label: 'PM10', unit: 'µg/m³' }
                 ];
 
                 dataItems.forEach(item => {
-                    const element = current.querySelector(item.key);
-                    if (element && element.textContent) {
+                    // Use getElementsByTagName instead of querySelector for more reliable selection
+                    const elements = current.getElementsByTagName(item.key.replace('\\', ''));
+                    if (elements.length > 0 && elements[0].textContent) {
                         const div = document.createElement('div');
                         div.className = 'data-item';
                         div.innerHTML = `
                             <div class="label">${item.label}</div>
-                            <div class="value">${element.textContent}${item.unit}</div>
+                            <div class="value">${elements[0].textContent}${item.unit}</div>
                         `;
                         dataGrid.appendChild(div);
                     }

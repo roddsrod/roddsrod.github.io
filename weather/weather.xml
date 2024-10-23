@@ -1,1 +1,32 @@
-<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header/><soap:Body><current><city>PAR</city><temperature>16.4</temperature><feelslike>16.4</feelslike><wind>10.4</wind><humidity>59</humidity><visibility>Low Visibility</visibility><pressure>1030</pressure><UV>0.2</UV><CO>316.35</CO><NO2>12.95</NO2><PM2.5>15.54</PM2.5><PM10>23.495</PM10></current></soap:Body></soap:Envelope>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+  <soap:Header/>
+  <soap:Body>
+  <current>
+  <city>
+  PAR</city>
+  <temperature>
+  16.4</temperature>
+  <feelslike>
+  16.4</feelslike>
+  <wind>
+  10.4</wind>
+  <humidity>
+  59</humidity>
+  <visibility>
+  Low Visibility</visibility>
+  <pressure>
+  1030</pressure>
+  <UV>
+  0.2</UV>
+  <CO>
+  316.35</CO>
+  <NO2>
+  12.95</NO2>
+  <PM2.5>
+  15.54</PM2.5>
+  <PM10>
+  23.495</PM10>
+  </current>
+  </soap:Body>
+  </soap:Envelope>
+  

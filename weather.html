@@ -151,7 +151,7 @@
 <body>
     <div class="container">
         <h1>Weather and Air Quality Dashboard</h1>
-        <div class="timestamp" id="timestamp"></div>
+<!--         <div class="timestamp" id="timestamp"></div> -->
 <!--         <button onclick="fetchData()">
             <span>↻</span> Refresh Data
         </button> -->
@@ -218,9 +218,9 @@
                 });
 
                 // Update timestamp
-                const now = new Date();
-                document.getElementById('timestamp').textContent = 
-                    `Last updated: ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
+                // const now = new Date();
+                // document.getElementById('timestamp').textContent = 
+                //     `Last updated: ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
 
             } catch (error) {
                 console.error('Detailed error:', error);

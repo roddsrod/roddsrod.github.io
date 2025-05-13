@@ -244,6 +244,40 @@
         .social-links .fas {
             font-size: 24px;
         }
+        
+	.tooltip {
+	  position: relative;
+	  display: inline-block;
+	}
+
+	.tooltip .tooltiptext {
+	  position: absolute;
+	  visibility: hidden;
+	  width: 120px;
+	  background-color: #555;
+	  color: #fff;
+	  text-align: center;
+	  padding: 5px 0;
+	  border-radius: 6px;
+	  bottom: calc(100% + 10px);
+	  left: 50%;
+	  margin-left: -60px;
+	}
+
+	.tooltip .tooltiptext::after {
+	  content: "";
+	  position: absolute;
+	  bottom: -20px;
+	  left: 50px;
+	  border-width: 10px;
+	  border-style: solid;
+	  border-color: #555 transparent transparent transparent;
+	}
+
+	.tooltip:hover .tooltiptext {
+	  visibility: visible;
+	  opacity: 1;
+	}
 
         /* Credentials Styles */
         .credentials {
@@ -342,11 +376,12 @@
                     <p>Feel free to reach out to me at <a href="mailto:mailme@rbx.app">mailme@rbx.app</a>.</p>
                     <p>You can also check my credentials below:</p>
                     <div class="social-links">
-                        <a href="https://github.com/rodolfrodrigues"><i class="fab fa-github"></i></a>
-                        <a href="https://linkedin.com/in/rodolfo-rodrigues"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://console.cloud.google.com/home?hl=en"><i class="fab fa-google"></i></a>
-                        <a href="https://portal.microsoft.com/"><i class="fab fa-microsoft"></i></a>
-                        <a href="https://www.credly.com/users/rodolfo-rodrigues"><i class="fas fa-certificate"></i></a>
+                        <a href="https://github.com/rodolfrodrigues" class="tooltip"><i class="fab fa-github"></i><span class="tooltiptext">GitHub</span></a>
+                        <a href="https://linkedin.com/in/rodolfo-rodrigues" class="tooltip"><i class="fab fa-linkedin"></i><span class="tooltiptext">LinkedIn</span></a>
+                        <a href="https://partner.cloudskillsboost.google/public_profiles/49ec95aa-5737-4962-820b-36c0f8d40256" class="tooltip"><i class="fab fa-google"></i><span class="tooltiptext">Google Cloud</span></a>
+                        <a href="https://learn.microsoft.com/en-us/users/rodolforodrigues-2584/achievements?tab=tab-learning-paths" class="tooltip"><i class="fab fa-microsoft"></i><span class="tooltiptext">Microsoft Learn</span></a>
+                        <a href="https://skillsoft.digitalbadges.skillsoft.com/profile/rodolforodrigues832443/wallet#gs.bufolc" class="tooltip"><i class="fas fa-shapes"></i><span class="tooltiptext">SkillSoft</span></a>
+                        <a href="https://www.credly.com/users/rodolfo-rodrigues.ad9bfeaf" class="tooltip"><i class="fas fa-certificate"></i><span class="tooltiptext">Credly</span></a>
                     </div>
                 </div>
             </div>

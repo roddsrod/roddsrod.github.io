@@ -282,15 +282,27 @@
         /* Credentials Styles */
         .credentials {
             background-color: #181818;
-	    padding-top: 5px;
-	    padding-right: 20px;
-	    padding-bottom: 5px;
-	    padding-left: 20px;
+	    padding: 15px;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             max-width: fit-content;
             margin: 20px auto;
         }
+        .credentials table {
+	  border-collapse: collapse;
+	  width: 300px;
+	}
+
+	.credentials th, .credentials td {
+	  border: 1px solid #ddd;
+	  padding: 8px;
+	  text-align: center;
+	}
+
+	.credentials th {
+	  background-color: #f0f0f0;
+	}
+	
     </style>
 </head>
 <body>
@@ -362,10 +374,18 @@
                 <p>&nbsp;</p>
                 <p><a href="https://tuxai.ircnet.ai" target="_blank">Customized GenAI chat platform</a></p>
                 <p class="unna-regular">Self Hosted, Open WebUI based GenAI platform with custom tailored LLMs and functions. Give it a try using these test credentials!</p>
-                <div class="credentials">
-                    <p class="no-margin"><i>username:</i> <span class="genos-regular">testuser</span></p>
-                    <p class="no-margin"><i>password:</i> <span class="genos-regular">jnaga2DVtJZB</span></p>
-                </div>
+	<div class="credentials">
+	  <table>
+	    <tr>
+	      <td><i>username</i></td>
+	      <td><i>password</i></td>
+	    </tr>
+	    <tr>
+	      <td><span class="genos-regular">testuser</span></td>
+	      <td><span class="genos-regular">jnaga2DVtJZB</span></td>
+	    </tr>
+	  </table>
+	</div>
             </div>
         </section>
 

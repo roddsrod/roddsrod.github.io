@@ -23,9 +23,9 @@
         }
         
         .no-margin {
-	    margin-top: 0;
-	    margin-bottom: 0;
-	}
+            margin-top: 0;
+            margin-bottom: 0;
+	    }
 
         /* Container Styles */
         .container {
@@ -84,6 +84,7 @@
             font-family: "Special Elite", system-ui;
             font-weight: 400;
             font-style: normal;
+            font-size: 30px;
         }
 
         .knewave-regular {
@@ -137,38 +138,36 @@
             font-style: normal;
         }
         .genos-regular {
-	  font-family: "Genos", sans-serif;
-	  font-weight: 400;
-	  font-style: normal;
-          font-size: 30px;
-	}
-	.smooch-sans-regular {
-	  font-family: "Smooch Sans", sans-serif;
-	  font-optical-sizing: auto;
-	  font-weight: 400;
-	  font-style: normal;
-          font-size: 28px;
-	}
+            font-family: "Genos", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 30px;
+        }
+        .smooch-sans-regular {
+            font-family: "Smooch Sans", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 28px;
+        }
 
         /* Section Styles */
         section {
             background: #232323;
-            margin: 20px 0;
+            margin-bottom: 20px;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .topic h2 {
+        .topic{
             font-size: 30px;
             text-align: center;
-        }
-
-        h2 {
             border-bottom: 1px solid #555;
             margin-bottom: 10px;
             color: #cbcbcb;
         }
+
 
         /* Skills Styles */
         .skills ul {
@@ -203,7 +202,7 @@
             transition: color 0.3s ease;
             font-weight: bold;
             font-family: "Michroma", sans-serif;
-          font-size: 20px;
+            font-size: 20px;
         }
 
         .projects a:hover {
@@ -245,65 +244,125 @@
             font-size: 24px;
         }
         
-	.tooltip {
-	  position: relative;
-	  display: inline-block;
-	}
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
 
-	.tooltip .tooltiptext {
-	  position: absolute;
-	  visibility: hidden;
-	  width: 120px;
-	  background-color: #555;
-	  color: #fff;
-	  text-align: center;
-	  padding: 5px 0;
-	  border-radius: 6px;
-	  bottom: calc(100% + 10px);
-	  left: 50%;
-	  margin-left: -60px;
-	}
+        .tooltip .tooltiptext {
+            position: absolute;
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            margin-left: -60px;
+        }
 
-	.tooltip .tooltiptext::after {
-	  content: "";
-	  position: absolute;
-	  bottom: -20px;
-	  left: 50px;
-	  border-width: 10px;
-	  border-style: solid;
-	  border-color: #555 transparent transparent transparent;
-	}
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 50px;
+            border-width: 10px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
 
-	.tooltip:hover .tooltiptext {
-	  visibility: visible;
-	  opacity: 1;
-	}
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
 
         /* Credentials Styles */
         .credentials {
             background-color: #181818;
-	    padding: 15px;
+            padding: 15px;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             max-width: fit-content;
             margin: 20px auto;
         }
         .credentials table {
-	  border-collapse: collapse;
-	  width: 300px;
-	}
+            border-collapse: collapse;
+            width: 300px;
+        }
 
-	.credentials th, .credentials td {
-	  border: 1px solid #ddd;
-	  padding: 8px;
-	  text-align: center;
-	}
+        .credentials th, .credentials td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
 
-	.credentials th {
-	  background-color: #f0f0f0;
-	}
-	
+        .credentials th {
+            background-color: #f0f0f0;
+        }
+
+        /* Collapsible styles */
+        .topic h2 {
+            transition: background-color 0.3s;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .topic h2:hover {
+            background-color: #333;
+        }
+
+        .collapse-indicator {
+            font-size: 0.7em;
+            margin-left: 10px;
+        }
+
+        /* Initially show all details sections */
+        .details {
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all topic h2 elements
+            const topicHeadings = document.querySelectorAll('.topic h2');
+            
+            topicHeadings.forEach(heading => {
+                // Set cursor style to indicate it's clickable
+                heading.style.cursor = 'pointer';
+                
+                // Add a small indicator that it's collapsible
+                heading.innerHTML += ' <span class="collapse-indicator"><i class="far fa-arrow-alt-circle-down"></i></span>';
+                
+                // Find the parent section
+                const section = heading.closest('section');
+                
+                // Find the details div within this section
+                const details = section.querySelector('.details');
+                
+                // Hide details by default
+                details.style.display = 'none';
+                
+                // Add click event
+                heading.addEventListener('click', function() {
+                    // Find the details div within this section
+                    const details = section.querySelector('.details');
+                    
+                    // Toggle the visibility
+                    if (details.style.display === 'none') {
+                        details.style.display = 'block';
+                        this.querySelector('.collapse-indicator').innerHTML = '<i class="far fa-arrow-alt-circle-up"></i>';
+                    } else {
+                        details.style.display = 'none';
+                        this.querySelector('.collapse-indicator').innerHTML = '<i class="far fa-arrow-alt-circle-down"></i>';
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -324,9 +383,11 @@
             <div class="topic">
                 <h2 class="special-elite-regular">About Me</h2>
             </div>
-            <div class="smooch-sans-regular">
-                <p>Results-driven tech professional with a diverse IT background, excelling in customer support, network infrastructure, and learning & development. <b>Proven ability to rapidly master emerging technologies through self-directed learning</b>. Currently leveraging expertise in cloud platforms and scripting languages (<i>Python, HTML/CSS, BASH, PowerShell</i>) to drive innovation.</p>
-                <p>Notably, I've successfully managed <i>Virtual Private Servers and a custom SMF-based forum with 100+ active users</i>. I'm now seeking to apply my technical expertise to drive transformative projects in GenAI, Python, or Integration domains - <b>specifically with SAP CPI</b> - to optimize efficiency and push technological boundaries. With a <b>strong aptitude for rapid learning and versatile problem-solving</b>, I'm poised to make a meaningful impact in a dynamic tech environment.</p>
+            <div class="details">
+                <div class="smooch-sans-regular">
+                    <p>Results-driven tech professional with a diverse IT background, excelling in customer support, network infrastructure, and learning & development. <b>Proven ability to rapidly master emerging technologies through self-directed learning</b>. Currently leveraging expertise in cloud platforms and scripting languages (<i>Python, HTML/CSS, BASH, PowerShell</i>) to drive innovation.</p>
+                    <p>Notably, I've successfully managed <i>Virtual Private Servers and a custom SMF-based forum with 100+ active users</i>. I'm now seeking to apply my technical expertise to drive transformative projects in GenAI, Python, or Integration domains - <b>specifically with SAP CPI</b> - to optimize efficiency and push technological boundaries. With a <b>strong aptitude for rapid learning and versatile problem-solving</b>, I'm poised to make a meaningful impact in a dynamic tech environment.</p>
+                </div>
             </div>
         </section>
 
@@ -334,33 +395,35 @@
             <div class="topic">
                 <h2 class="special-elite-regular">Skills</h2>
             </div>
-            <div class="skills pt-serif-regular">
-                <ul>
-                    <li>Bash</li>
-                    <li>PowerShell</li>
-                    <li>Linux</li>
-                    <li>Windows</li>
-                    <li>HTML5</li>
-                    <li>CSS3</li>
-                    <li>JavaScript</li>
-                    <li>Node.js</li>
-                    <li>Python</li>
-                    <li>SAP CPI</li>
-                    <li>VPS</li>
-                    <li>VPN</li>
-                    <li>FTP</li>
-                    <li>SSH</li>
-                    <li>nginx</li>
-                    <li>Routing</li>
-                    <li>MS Office</li>
-                    <li>Azure</li>
-                    <li>GCP</li>
-                    <li>IAM</li>
-                    <li>GenAI</li>
-                    <li>LLM</li>
-                    <li>RAG</li>
-                    <li>MCP</li>
-                </ul>
+            <div class="details">
+                <div class="skills pt-serif-regular">
+                    <ul>
+                        <li>Bash</li>
+                        <li>PowerShell</li>
+                        <li>Linux</li>
+                        <li>Windows</li>
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                        <li>JavaScript</li>
+                        <li>Node.js</li>
+                        <li>Python</li>
+                        <li>SAP CPI</li>
+                        <li>VPS</li>
+                        <li>VPN</li>
+                        <li>FTP</li>
+                        <li>SSH</li>
+                        <li>nginx</li>
+                        <li>Routing</li>
+                        <li>MS Office</li>
+                        <li>Azure</li>
+                        <li>GCP</li>
+                        <li>IAM</li>
+                        <li>GenAI</li>
+                        <li>LLM</li>
+                        <li>RAG</li>
+                        <li>MCP</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -368,30 +431,34 @@
             <div class="topic">
                 <h2 class="special-elite-regular">My Current Projects</h2>
             </div>
-            <div class="projects">
-                <p><a href="https://community.sap.com/t5/technology-blog-posts-by-members/automating-sap-integration-suite-deployment/ba-p/14065276" target="_blank">Automating SAP Integration Suite Deployment</a></p>
-                <p class="unna-regular">A simple yet powerful PowerShell script that automates 95% of the steps required to create a working SAP Integration Suite environment on SAP Business Technology Platform (BTP).</p>
-                <p>&nbsp;</p>
-                <p><a href="https://tuxai.ircnet.ai" target="_blank">Customized GenAI chat platform</a></p>
-                <p class="unna-regular">Self Hosted, Open WebUI based GenAI platform with custom tailored LLMs and functions. Give it a try using these test credentials!</p>
-	<div class="credentials">
-	  <table>
-	    <tr>
-	      <td><i>username</i></td>
-	      <td><i>password</i></td>
-	    </tr>
-	    <tr>
-	      <td><span class="genos-regular">testuser</span></td>
-	      <td><span class="genos-regular">jnaga2DVtJZB</span></td>
-	    </tr>
-	  </table>
-	</div>
+            <div class="details">
+                <div class="projects">
+                    <p><a href="https://community.sap.com/t5/technology-blog-posts-by-members/automating-sap-integration-suite-deployment/ba-p/14065276" target="_blank">Automating SAP Integration Suite Deployment</a></p>
+                    <p class="unna-regular">A simple yet powerful PowerShell script that automates 95% of the steps required to create a working SAP Integration Suite environment on SAP Business Technology Platform (BTP).</p>
+                    <p>&nbsp;</p>
+                    <p><a href="https://tuxai.ircnet.ai" target="_blank">Customized GenAI chat platform</a></p>
+                    <p class="unna-regular">Self Hosted, Open WebUI based GenAI platform with custom tailored LLMs and functions. Give it a try using these test credentials!</p>
+                        <div class="credentials">
+                        <table>
+                            <tr>
+                                <td><i>username</i></td>
+                                <td><i>password</i></td>
+                            </tr>
+                            <tr>
+                                <td><span class="genos-regular">testuser</span></td>
+                                <td><span class="genos-regular">jnaga2DVtJZB</span></td>
+                            </tr>
+                        </table>
+                        </div>
+                </div>
             </div>
         </section>
 
         <section id="contact">
             <div class="topic">
                 <h2 class="special-elite-regular">Get in Touch</h2>
+            </div>
+            <div class="details">
                 <div class="contact alkatra-regular">
                     <p>Feel free to reach out to me at <a href="mailto:mailme@rbx.app">mailme@rbx.app</a>.</p>
                     <p>You can also check my credentials below:</p>
@@ -407,7 +474,6 @@
             </div>
         </section>
     </div>
-
     <style>
         @keyframes bounce {
             0%, 100% {
